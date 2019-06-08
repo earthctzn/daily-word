@@ -1,28 +1,17 @@
 # DailyWord
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/DailyWord`. To experiment with that code, run `bin/console` for an interactive prompt.
+Welcome and thank you for using DailyWord!  This Gem will provide a CLI that gives you a new word and its meaning every day. You can also go back to previous DailyWords you may have missed. 
 
-TODO: Delete this and the text above, and describe your gem
+Coming soon - audio pronounciation of each word.
 
-## Installation
+## Getting Started
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'DailyWord'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+To install this gem, type the following in your command line:
 
     $ gem install DailyWord
 
-## Usage
-
-TODO: Write usage instructions here
+### Prerequisites
+You will need the nokogiri and open-uri gems to run this gem.
 
 ## Development
 
