@@ -1,6 +1,6 @@
 class DailyWord::Scraper
 
-    def scrape 
-        "raw data file"
+    def self.get_words 
+       puts "raw data file"
     end
 end

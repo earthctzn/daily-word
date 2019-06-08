@@ -11,7 +11,9 @@ To install this gem, type the following in your command line:
     $ gem install DailyWord
 
 ### Prerequisites
-You will need the nokogiri and rake gems to run this.
+You will need the nokogiri and rake gems to run DailyWord. These will be installed upon running:
+
+```$ bin/dialy-word```
 
 ## Development
 
@@ -24,7 +26,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/<earthctzn>/DailyWord. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at [DailyWord](https://github.com/<earthctzn>/DailyWord). This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
