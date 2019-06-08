@@ -3,20 +3,22 @@ class DailyWord::Scraper
     DATA = "https://www.merriam-webster.com/word-of-the-day/calendar"
 
     WOD = "https://www.merriam-webster.com/word-of-the-day"
-    def self.wod
-        bulk = Nokogiri::HTML(open(WOD))
-
+    # def self.wod
+    #     bulk = Nokogiri::HTML(open(WOD))
+    #     # this will eventually instantiate a word object and add any missing attributes to that instance's data.
+    #     word_data = bulk.css()
     
-    
-    end
+    # end
     
     
     
     def self.get_calendar 
         bulk = Nokogiri::HTML(open(DATA))
         words = bulk.css("div.more-words-of-day-container h3")
-        list = words.each_with_index{|month, i| puts "#{i+1}. #{month.text}"}
-        list# I will be creating my word hash here...baby
+        # months = words.split(/\s|\d{4}/).reject(&:empty?)
+        # Word.new()
+        # words.each_with_index{|month, i| puts "#{i+1}. #{month.text}"}
+        
         binding.pry
     end
 
