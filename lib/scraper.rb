@@ -5,7 +5,7 @@ class DailyWord::Scraper
     def self.get_words 
         bulk = Nokogiri::HTML(open(DATA))
         words = bulk.css("div.more-words-of-day-container h3")
-        # words.each do |month|
+        words.each_with_index{|month, i| puts "#{i+1}. #{month.text}"}
 
         binding.pry 
        puts "raw data file"
