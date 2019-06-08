@@ -14,12 +14,21 @@ class DailyWord::Scraper
     
     def self.get_calendar 
         bulk = Nokogiri::HTML(open(DATA))
-        words = bulk.css("div.more-words-of-day-container h3")
-        # months = words.split(/\s|\d{4}/).reject(&:empty?)
-        # Word.new()
-        # words.each_with_index{|month, i| puts "#{i+1}. #{month.text}"}
+        months = bulk.css("div.more-words-of-day-container h3")
+        months.map.with_index do |month, i|
+            binding.pry
+            a = Date.parse("#{month.text}")
+            array = month.text.split(/\s/)
+            month = a.strftime("%m/%d/%Y").to_i           
+            date = DateTime.new(array[1].to_i, month)
+            puts "#{i+1}. #{date.strftime("%m/%d/%Y")}"
+            word_data = bulk.css("h2 a")
+            links = word_data.map{|url| url.attr("href")}
+            names = word_data.map{|url| url.text}
+            name = 
+
+        end
         
-        binding.pry
     end
 
     def self.get_words
