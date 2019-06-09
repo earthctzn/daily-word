@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require_relative '../lib/dailyword'
+require_relative '../config/environment'
 
 app = DailyWord::CLI.call 
