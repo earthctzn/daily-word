@@ -3,7 +3,7 @@ class DailyWord::CLI
 
 
     def self.call
-        user_input 
+        user_input = ""
         puts "Hi there! Welcome to DailyWord!" 
         # Dailyword::Scraper.wod 
         puts "Please choose a month to see the daily words."

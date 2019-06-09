@@ -16,7 +16,7 @@ class DailyWord::Scraper
         bulk = Nokogiri::HTML(open(DATA))
         months = bulk.css("div.more-words-of-day-container h3")
         months.map.with_index do |month, i|
-            binding.pry
+            
             a = Date.parse("#{month.text}")
             array = month.text.split(/\s/)
             month = a.strftime("%m/%d/%Y").to_i           
@@ -24,17 +24,21 @@ class DailyWord::Scraper
             puts "#{i+1}. #{date.strftime("%m/%d/%Y")}"
             word_data = bulk.css("h2 a")
             links = word_data.map{|url| url.attr("href")}
+            
+            url = links.collect{|l|url = l}
             names = word_data.map{|url| url.text}
-            name = 
-
-        end
-        
+            binding.pry
+            names.each do |name|
+                DailyWord::Word.new("#{name}", "#{date}", "#{url}") # :name, :date, :definition, :example, :pronounciation
+            end
+         
+        end        
     end
 
     def self.get_words
         bulk = Nokogiri::HTML(open(DATA))
         dates = bulk.css("ul.more-wod-items h4")
-        binding.pry
+        # binding.pry
         while list.length < dates.length do 
             list[:"#{date.text}"] = dates.each{|date| "date.text"}
         end
