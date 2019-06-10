@@ -40,16 +40,17 @@ class DailyWord::Scraper
 
 
 
-    def self.get_words
+    def self.get_words()
         bulk = Nokogiri::HTML(open(DATA))
         months = bulk.css("ul.more-wod-items h4")
         years = bulk.css("div.more-words-of-day-container h3")
         years.map do |y|
            year = y.text.split.last
-            months.select do |md|
-                mnthdy = md.text
+        months.select do |md|
+            mnthdy = md.text
             binding.pry
-            date = DateTime.parse("#{mnthdy}", "#{year}")
+        date = DateTime.parse("#{mnthdy}", "#{year}")
+
             end 
         end
     end
