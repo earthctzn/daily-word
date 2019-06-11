@@ -3,16 +3,26 @@ class DailyWord::Scraper
     DATA = "https://www.merriam-webster.com/word-of-the-day/calendar"
 
     WOD = "https://www.merriam-webster.com/word-of-the-day"
-    # def self.wod
-    #     bulk = Nokogiri::HTML(open(WOD))
-    #     # this will eventually instantiate a word object and add any missing attributes to that instance's data.
-    #     word_data = bulk.css()
-    
-    # end
     
     
+    def self.wod
+        bulk = Nokogiri::HTML(open(WOD))
     
-    def self.get_calendar 
+        word = bulk.css("div.word-and-pronunciation h1").text
+        definition = bulk.css("div.wod-definition-container p")[0].text
+        date = DateTime.parse(bulk.css("span.w-a-title.margin-lr-0.margin-tb-1875em").text.strip)
+        example = bulk.css("div.wotd-examples p").text
+        pronunciation = bulk.css("span.word-syllables").text
+        url = "https://www.merriam-webster.com/word-of-the-day/" + "#{word}-#{date.strftime("%Y-%m-%d")}"
+        DailyWord::Word.new(word, date, url, definition, example, pronunciation)
+        
+        binding.pry
+    
+    end
+    
+    
+    
+    def self.get_calendar # puts out a numbered list with the month and year
         bulk = Nokogiri::HTML(open(DATA))
         months = bulk.css("div.more-words-of-day-container h3")
         months.map.with_index do |month, i|

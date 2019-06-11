@@ -4,26 +4,29 @@ class DailyWord::CLI
 
     def self.call
         puts "Hi there! Welcome to DailyWord!" 
-        # Dailyword::Scraper.wod 
-        puts "Please choose a month to see the daily words."
-        puts "To select a month, please type the corresponding number"
-         DailyWord::Scraper.get_words
+        DailyWord::Scraper.wod 
+       instructions 
+        
+        #  DailyWord::Scraper.get_words
         # DailyWord::Scraper.get_calendar
-        user_input = nil
-        user_input = gets.chomp
 
          
     end 
      
-    def instructions
-        case input
-        when user_input == "1"
+    def self.instructions
+        user_input = nil
+        until user_input == "exit"
+            puts "Would you like more words? y/n" 
+            user_input = gets.strip.downcase
+            case user_input
+            when user_input == "y"
             puts "Okayyy!"
-            #DailyWord::Word
-        when user_input == "exit"
+            # DailyWord::Word.all
+            when user_input == "exit"
             puts "Good bye!"
-        else
+            else
             puts "I dont understand that."
+            end 
         end
     end
 end
