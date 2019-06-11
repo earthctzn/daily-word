@@ -14,9 +14,12 @@ class DailyWord::Scraper
         example = bulk.css("div.wotd-examples p").text
         pronunciation = bulk.css("span.word-syllables").text
         url = "https://www.merriam-webster.com/word-of-the-day/" + "#{word}-#{date.strftime("%Y-%m-%d")}"
-        DailyWord::Word.new(word, date, url, definition, example, pronunciation)
+        d = DailyWord::Word.new(word, date, url, definition, example, pronunciation)
         
-        binding.pry
+        puts d.name 
+        puts d.pronunciation 
+        puts d.definition 
+        puts d.example
     
     end
     

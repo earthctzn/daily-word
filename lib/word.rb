@@ -1,15 +1,15 @@
 class DailyWord::Word 
-    attr_accessor :name, :date, :url, :definition, :example, :pronounciation
+    attr_accessor :name, :date, :url, :definition, :example, :pronunciation
 
     @@all = []
 
-    def initialize(name = nil, date = nil, url = nil, definition = nil, example = nil, pronounciation = nil)
+    def initialize(name = nil, date = nil, url = nil, definition = nil, example = nil, pronunciation = nil)
         @name = name 
         @date = date 
         @url = url 
         @definition = definition 
         @example = example
-        @pronounciation = pronounciation
+        @pronunciation = pronunciation
         @@all << self 
     end
         
