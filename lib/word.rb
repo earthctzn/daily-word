@@ -3,6 +3,10 @@ class DailyWord::Word
 
     @@all = []
 
+    def self.all
+        @@all
+    end 
+
     def initialize(name = nil, date = nil, url = nil, definition = nil, example = nil, pronunciation = nil)
         @name = name 
         @date = date 
@@ -13,9 +17,14 @@ class DailyWord::Word
         @@all << self 
     end
         
+    def is_full?
+        if  @definition != nil || @example != nil || @pronunciation == !nil
+            return true
+        else
+            return false
+        end
+    end
 
-    def self.all
-        @@all
-    end 
+
 
 end

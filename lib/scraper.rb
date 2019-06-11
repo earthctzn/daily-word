@@ -13,7 +13,7 @@ class DailyWord::Scraper
         date = DateTime.parse(bulk.css("span.w-a-title.margin-lr-0.margin-tb-1875em").text.strip)
         example = bulk.css("div.wotd-examples p").text
         pronunciation = bulk.css("span.word-syllables").text
-        url = "https://www.merriam-webster.com/word-of-the-day/" + "#{word}-#{date.strftime("%Y-%m-%d")}"
+        url = "https://www.merriam-webster.com/word-of-the-day/#{word}-#{date.strftime("%Y-%m-%d")}"
         d = DailyWord::Word.new(word, date, url, definition, example, pronunciation)
         
         puts d.name.upcase
@@ -46,32 +46,43 @@ class DailyWord::Scraper
     def self.get_url
         bulk = Nokogiri::HTML(open(DATA))
         word_data = bulk.css("h2 a")
-        word_data.each{|url| url.attr("href")}
+        word_data.each do|link| 
+         url = "https://www.merriam-webster.com/#{link.attr("href")}"
+        end
     end
-
-
-
-
 
     def self.get_words
         bulk = Nokogiri::HTML(open(DATA))
-        months = bulk.css("ul.more-wod-items h4")
-        years = bulk.css("div.more-words-of-day-container h3")
-        year = years.map{|y| y.text.split.last}
-        mnthdy = months.each{|md|md.text}
-        date = DateTime.parse("#{mnthdy}", "#{year}")
-        words = bulk.css("ul.more-wod-items a")
-        words.each do |w|
-                word = w.text
-        words.map do |u|
-            url = "https://www.merriam-webster.com/" + "#{u.attr("href")}" #not sure why its dying after this line. 
-             
-    d = DailyWord::Word.new(word, date, url)
-    # binding.pry
-            end 
-        end
-    
-    end
+        words_by_month = bulk.css("div.more-words-of-day-container")
+        words_by_month.each do |wm|
+            year_month = wm.css("h3").text.split
+            words = bulk.css("ul.more-wod-items a")
+            words.each do |link|
+                name = link.text
+                day = link.attr("href").split("-")[-1]
+                month = link.attr("href").split("-")[-2]
+                year = link.attr("href").split("-")[-3]
+                url = "https://www.merriam-webster.com/#{link.attr("href")}"
+                date = DateTime.new(year.to_i, month.to_i, day.to_i)
+                DailyWord::Word.new(name, date, url)
+            end
+        end 
+     binding.pry   
+    end 
+        # binding.pry 
+        # words_array = words.map{|w| w.text}
+        
+        # url_array =[]
+        #  words.map do |u|
+        #     #binding.pry
+        #    if u.attr("href")
+        #    url_array << "https://www.merriam-webster.com/#{u.attr("href")}" #not sure why its dying after this line. 
+        #    else
+        #     puts "URL not available"
+        #    end
+        #     binding.pry
+        #         end
+        
          
 
         # names.each do |name| 

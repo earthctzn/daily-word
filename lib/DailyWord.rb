@@ -6,3 +6,4 @@
 # require "open-uri"
 # require "bundler/setup"
 # Bundler.require(:default)
+require_relative "../config/environment"

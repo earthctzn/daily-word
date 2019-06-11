@@ -2,4 +2,4 @@
 
 require_relative '../config/environment'
 
-app = DailyWord::CLI.call 
+app = DailyWord::CLI.new.call 

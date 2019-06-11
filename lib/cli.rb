@@ -2,10 +2,12 @@ class DailyWord::CLI
 
 
 
-    def self.call
+    def call
         puts "Today's Daily Word is:" 
         DailyWord::Scraper.wod 
+        DailyWord::Scraper.get_calendar
        instructions 
+      
         
         #  
         # DailyWord::Scraper.get_calendar
@@ -13,16 +15,17 @@ class DailyWord::CLI
          
     end 
      
-    def self.instructions
+    def instructions
         user_input = nil
         until user_input == "exit"
             puts "Would you like more words?" "y/n" 
             user_input = gets.strip.downcase
             case 
                 when user_input == "y"
-                puts "Okayyy!"
                 DailyWord::Scraper.get_words
-                # DailyWord::Word.all
+                puts "Okayyy!"
+                when user_input == "list"
+                DailyWord::Word.all
                 when user_input == "exit"
                 puts "Good bye!"
                 else
