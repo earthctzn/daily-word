@@ -7,7 +7,6 @@ class DailyWord::Scraper
     
     def self.wod
         bulk = Nokogiri::HTML(open(WOD))
-    
         word = bulk.css("div.word-and-pronunciation h1").text
         definition = bulk.css("div.wod-definition-container p")[0].text
         date = DateTime.parse(bulk.css("span.w-a-title.margin-lr-0.margin-tb-1875em").text.strip)
@@ -23,24 +22,12 @@ class DailyWord::Scraper
     
     end
     
-    
-    
     def self.get_calendar # puts out a numbered list with the month and year
         bulk = Nokogiri::HTML(open(DATA))
         months = bulk.css("div.more-words-of-day-container h3")
         months.map.with_index do |month, i|
             puts "#{i+1}. #{month.text}"
         end
-        
-
-        # links.each do |url|
-        #     names = word_data.map{|url| url.text}
-                
-               
-            # end
-        
-        # end
-        
     end
 
     def self.get_url
@@ -69,28 +56,5 @@ class DailyWord::Scraper
         end 
      binding.pry   
     end 
-        # binding.pry 
-        # words_array = words.map{|w| w.text}
         
-        # url_array =[]
-        #  words.map do |u|
-        #     #binding.pry
-        #    if u.attr("href")
-        #    url_array << "https://www.merriam-webster.com/#{u.attr("href")}" #not sure why its dying after this line. 
-        #    else
-        #     puts "URL not available"
-        #    end
-        #     binding.pry
-        #         end
-        
-         
-
-        # names.each do |name| 
-        #     DailyWord::Word.new("#{name}", "#{date}", "#{url}")
-        #     end
-        # possibly need to split this into 2 methods or I may have to create my hash here with date: word: symbols.
-        # words = bulk.css("h2 a")
-        # words.each do |url| 
-        #     list{url.attr("href")}
-    # end
 end

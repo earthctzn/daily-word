@@ -1,35 +1,33 @@
 class DailyWord::CLI
-
+    include Concerns::Findable
 
 
     def call
-        puts "Today's Daily Word is:" 
+        puts "Welcome! Today's Daily Word is:" 
         DailyWord::Scraper.wod 
-        DailyWord::Scraper.get_calendar
-       instructions 
-      
-        
-        #  
-        # DailyWord::Scraper.get_calendar
-
-         
+        instructions   
     end 
      
     def instructions
         user_input = nil
         until user_input == "exit"
-            puts "Would you like more words?" "y/n" 
             user_input = gets.strip.downcase
             case 
+                return "View past words?" "y/n" 
                 when user_input == "y"
                 DailyWord::Scraper.get_words
-                puts "Okayyy!"
+                return "To view past words, please type a month from the list below."
+                DailyWord::Scraper.get_calendar
+                when user_input == "January"
+
+                
+                DailyWord::Word.by_month(user_input)
                 when user_input == "list"
                 DailyWord::Word.all
                 when user_input == "exit"
-                puts "Good bye!"
+                return "Good bye!"
                 else
-                puts "I dont understand that."
+                return "I dont understand that."
             end 
         end
     end

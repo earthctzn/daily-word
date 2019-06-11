@@ -1,4 +1,5 @@
-class DailyWord::Word 
+class DailyWord::Word
+    include Concerns::Findable
     attr_accessor :name, :date, :url, :definition, :example, :pronunciation
 
     @@all = []
@@ -16,7 +17,7 @@ class DailyWord::Word
         @pronunciation = pronunciation
         @@all << self 
     end
-        
+
     def is_full?
         if  @definition != nil || @example != nil || @pronunciation == !nil
             return true
