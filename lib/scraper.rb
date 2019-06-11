@@ -16,9 +16,9 @@ class DailyWord::Scraper
         url = "https://www.merriam-webster.com/word-of-the-day/" + "#{word}-#{date.strftime("%Y-%m-%d")}"
         d = DailyWord::Word.new(word, date, url, definition, example, pronunciation)
         
-        puts d.name 
+        puts d.name.upcase
         puts d.pronunciation 
-        puts d.definition 
+        puts d.definition
         puts d.example
     
     end
@@ -46,31 +46,34 @@ class DailyWord::Scraper
     def self.get_url
         bulk = Nokogiri::HTML(open(DATA))
         word_data = bulk.css("h2 a")
-        word_data.map{|url| url.attr("href")}
+        word_data.each{|url| url.attr("href")}
     end
 
 
 
 
 
-    def self.get_words()
+    def self.get_words
         bulk = Nokogiri::HTML(open(DATA))
         months = bulk.css("ul.more-wod-items h4")
         years = bulk.css("div.more-words-of-day-container h3")
-        years.map do |y|
-           year = y.text.split.last
-        months.select do |md|
-            mnthdy = md.text
-            binding.pry
+        year = years.map{|y| y.text.split.last}
+        mnthdy = months.each{|md|md.text}
         date = DateTime.parse("#{mnthdy}", "#{year}")
-
+        words = bulk.css("ul.more-wod-items a")
+        words.each do |w|
+                word = w.text
+        words.map do |u|
+            url = "https://www.merriam-webster.com/" + "#{u.attr("href")}" #not sure why its dying after this line. 
+             
+    d = DailyWord::Word.new(word, date, url)
+    # binding.pry
             end 
         end
+    
     end
          
-        # while list.length < dates.length do 
-        #     list[:"#{date.text}"] = dates.each{|date| "date.text"}
-        # end
+
         # names.each do |name| 
         #     DailyWord::Word.new("#{name}", "#{date}", "#{url}")
         #     end
