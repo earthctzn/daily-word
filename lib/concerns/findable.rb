@@ -1,16 +1,11 @@
-module Concerns::Findable
+module DailyWord::Findable
 
     def by_date(input)
-        self.all.detect do |words|
-          if  DailyWord::Word.date.include?(input)
-          end
-        end
-            
+        self.all.detect{|words| words.date == input}
     end 
 
-    def find_by_name(name)
+    def by_name(name)
         self.all.detect{|word| word.name == name}
     end
-
 
 end

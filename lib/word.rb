@@ -1,5 +1,6 @@
 class DailyWord::Word
-    include Concerns::Findable
+    extend DailyWord::Findable
+
     attr_accessor :name, :date, :url, :definition, :example, :pronunciation
 
     @@all = []
