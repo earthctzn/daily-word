@@ -1,11 +1,34 @@
 class DailyWord::CLI
 
     def call
-        words
         self.greeting
+        words
         word_of_day
-        menu
-        instructions
+        # menu
+        # instructions
+        # puts greeting then
+        # gets the words and 
+        # runs word_of_day then
+        # start instrucions loop
+        loop do
+            user_input = menu
+            if user_input == "exit" || user_input.include?("n")
+                puts "\nGood bye!"
+                return 
+            else
+                case user_input
+                    when "y"
+                        list_months
+                        instructions
+                        # DailyWord::Word.by_date(user_input)
+                        # puts "Type in a word from the list to learn more!"
+                        # when user_input == "word from the list"
+                        # DailyWord::Word.by_name(user_input)
+                    else
+                        puts "I dont understand that."
+                end
+            end
+        end
     end 
 
 
@@ -32,32 +55,15 @@ class DailyWord::CLI
        list = DailyWord::Word.all.map do |word| 
             DateTime.new(word.date.year, word.date.month)
         end.uniq
-        #  binding.pry
        list.each_with_index do |d, i|
-        puts "#{i +1}. #{d.strftime('%B-%Y')}"
+        puts "\n#{i +1}. #{d.strftime('%B-%Y')}"
         end
-        # for each item in list 
-        #     puts the indext +1. month-year
     end
 
     def instructions
-        user_input = menu
-        puts "To view past words, please type the number for the month you wish to see.\n"
-        until user_input == "exit" || user_input.include?("n")
-            user_input = menu
-            case user_input
-                when "y"
-                    # binding.pry
-                    list_months
-                    # DailyWord::Word.by_date(user_input)
-                    # puts "Type in a word from the list to learn more!"
-                    # when user_input == "word from the list"
-                    # DailyWord::Word.by_name(user_input)
-                when "exit"
-                    puts "Good bye!"
-                else
-                    puts "I dont understand that."
-            end
-        end
+        user_input = nil
+        puts "\nTo view past words, please type the number for the month you wish to see.\n"
+        user_input = gets.strip.downcase
+        return user_input
     end
 end
