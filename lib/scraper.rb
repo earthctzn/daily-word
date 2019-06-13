@@ -15,10 +15,13 @@ class DailyWord::Scraper
         url = "https://www.merriam-webster.com/word-of-the-day/#{word}-#{date.strftime("%Y-%m-%d")}"
         d = DailyWord::Word.new(word, date, url, definition, example, pronunciation)
         
-        puts d.name.upcase
-        puts d.pronunciation 
-        puts d.definition
-        puts d.example
+        puts "\nToday's Daily Word is:\n\n"
+        puts "\n\n#{d.name.upcase}\n"
+        puts "#{d.pronunciation}\n\n" 
+        puts "\nDefinition:\n"
+        puts "\n#{d.definition}\n\n"
+        puts "\nExample:\n"
+        puts "\n#{d.example}\n\n"
     
     end
     
@@ -53,8 +56,7 @@ class DailyWord::Scraper
                 date = DateTime.new(year.to_i, month.to_i, day.to_i)
                 DailyWord::Word.new(name, date, url)
             end
-        end 
-     binding.pry   
+        end  
     end 
         
 end

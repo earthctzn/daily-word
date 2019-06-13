@@ -14,5 +14,5 @@ I'd like the app to start with:
 2. Display the word of day `wod` with full attributes i.e date, definition, example use cases, and pronunciation. (Pronunciation should be clickable to listen to the audio clip.)
 3. Ask the user for input.
 
-
+need to work out how to find by date and recycle methods 
 26:52
