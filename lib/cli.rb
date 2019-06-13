@@ -4,6 +4,7 @@ class DailyWord::CLI
         words
         self.greeting
         word_of_day
+        menu
         instructions
     end 
 
@@ -30,17 +31,20 @@ class DailyWord::CLI
     def list_months
        list = DailyWord::Word.all.map do |word| 
             DateTime.new(word.date.year, word.date.month)
-        end.uniq[0..11]
-        binding.pry
-        list.select.with_index do |d, i|
-            puts "#{i +1}. #{d.strftime("%B")}"
+        end.uniq
+        #  binding.pry
+       list.each_with_index do |d, i|
+        puts "#{i +1}. #{d.strftime('%B-%Y')}"
         end
+        # for each item in list 
+        #     puts the indext +1. month-year
     end
 
     def instructions
         user_input = menu
         puts "To view past words, please type the number for the month you wish to see.\n"
         until user_input == "exit" || user_input.include?("n")
+            user_input = menu
             case user_input
                 when "y"
                     # binding.pry
