@@ -1,11 +1,9 @@
 module DailyWord::Findable
 
-    def by_date(input)
-        self.all.date.select{|dates| words.date == input}
-    end 
 
     def by_name(name)
-        self.all.detect{|word| word.name == name}
+        self.all.detect{|word| word.name == name} # this should also use the  get_missing_data method.
     end
+
 
 end

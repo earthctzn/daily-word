@@ -24,27 +24,21 @@ class DailyWord::Scraper
         puts "\n#{d.example}\n\n"
     
     end
-    
-    def self.get_calendar # puts out a numbered list with the month and year
-        bulk = Nokogiri::HTML(open(DATA))
-        months = bulk.css("div.more-words-of-day-container h3")
-        months.map.with_index do |month, i|
-            puts "#{i+1}. #{month.text}"
-        end
-    end
 
-    def self.get_url
-        bulk = Nokogiri::HTML(open(DATA))
-        word_data = bulk.css("h2 a")
-        word_data.each do|link| 
-         url = "https://www.merriam-webster.com/#{link.attr("href")}"
-        end
+
+    def self.get_missing_data(word)
+        if word.is_full? == false
+        bulk = Nokogiri::HTML(open("#{word.url}"))
+        word.definition = bulk.css("div.wod-definition-container p")[0].text
+        word.example = bulk.css("div.wotd-examples p").text
+        word.pronunciation = bulk.css("span.word-syllables").text
+        end 
     end
 
     def self.get_words
         bulk = Nokogiri::HTML(open(DATA))
-        words_by_month = bulk.css("div.more-words-of-day-container")
-        words_by_month.each do |wm|
+        words_from_cal = bulk.css("div.more-words-of-day-container")
+        words_from_cal.each do |wm|
             year_month = wm.css("h3").text.split
             words = bulk.css("ul.more-wod-items a")
             words.each do |link|

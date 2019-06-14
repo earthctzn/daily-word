@@ -4,26 +4,19 @@ class DailyWord::CLI
         self.greeting
         words
         word_of_day
-        # menu
-        # instructions
-        # puts greeting then
-        # gets the words and 
-        # runs word_of_day then
-        # start instrucions loop
         loop do
             user_input = menu
             if user_input == "exit" || user_input.include?("n")
                 puts "\nGood bye!"
                 return 
+            elsif user_input.include?("1,2,3,4,5,6,7,8,9,10,11,12")
+                puts "\nDailyWords for the month of:\n"
+                words_of_month(input)
             else
                 case user_input
                     when "y"
-                        list_months
-                        instructions
-                        # DailyWord::Word.by_date(user_input)
-                        # puts "Type in a word from the list to learn more!"
-                        # when user_input == "word from the list"
-                        # DailyWord::Word.by_name(user_input)
+                        puts "\nPlease enter the number for the month you wish to see!\n" 
+                        DailyWord::Word.list_months
                     else
                         puts "I dont understand that."
                 end
@@ -36,10 +29,12 @@ class DailyWord::CLI
         puts "\n\nWelcome to Daily Word!"
     end
 
-
     def menu
-        puts "\n\nWould you like to see past words?\n"
+        puts "\n\nWould you like to see past DailyWords? y/n\n"
         user_input = gets.strip.downcase
+        if user_input == "exit" || user_input.include?("n")
+            puts "Ok, see ya tomorrow!"
+        end
         return user_input
     end
 
@@ -50,20 +45,26 @@ class DailyWord::CLI
     def words
         DailyWord::Scraper.get_words
     end
-        
-    def list_months
-       list = DailyWord::Word.all.map do |word| 
-            DateTime.new(word.date.year, word.date.month)
-        end.uniq
-       list.each_with_index do |d, i|
-        puts "\n#{i +1}. #{d.strftime('%B-%Y')}"
-        end
+    
+
+    def words_of_month(input)
+        binding.pry
+        inputarg = input.to_i -1
+        months = DailyWord::Word.get_months
+        dates = months.map.strftime('%B-%Y')
+        DailyWord::Word.all.select{|wo| wo} #need to finish this method.
+  
     end
 
-    def instructions
-        user_input = nil
-        puts "\nTo view past words, please type the number for the month you wish to see.\n"
-        user_input = gets.strip.downcase
-        return user_input
+    def display_data(word)
+        puts "\nToday's Daily Word is:\n\n"
+        puts "\n\n#{word.name.upcase}\n"
+        puts "\nPronunciation:\n"
+        puts "#{word.pronunciation}\n\n" 
+        puts "\nDefinition:\n"
+        puts "\n#{word.definition}\n\n"
+        puts "\nExample:\n"
+        puts "\n#{word.example}\n\n"
     end
+
 end

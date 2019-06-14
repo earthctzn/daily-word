@@ -19,7 +19,7 @@ class DailyWord::Word
         @@all << self 
     end
 
-    def is_full?
+    def self.is_full?
         if  @definition != nil || @example != nil || @pronunciation == !nil
             return true
         else
@@ -27,6 +27,15 @@ class DailyWord::Word
         end
     end
 
-
-
+    def self.get_months
+        list = self.all.map do |word| 
+            DateTime.new(word.date.year, word.date.month)
+        end.uniq
+    end
+    def self.list_months
+        list = DailyWord::Word.get_months
+        list.each_with_index do |d, i|
+        puts "\n#{i +1}. #{d.strftime('%B-%Y')}"
+        end
+    end
 end
