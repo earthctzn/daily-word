@@ -1,5 +1,7 @@
-class DailyWord::Word
+class DailyWord::Word 
     extend DailyWord::Findable
+    extend DailyWord::Savable::ClassMethods
+    include DailyWord::Savable::InstanceMethods
 
     attr_accessor :name, :date, :url, :definition, :example, :pronunciation
 
@@ -28,14 +30,30 @@ class DailyWord::Word
     end
 
     def self.get_months
-        list = self.all.map do |word| 
+        self.all.map do |word| 
             DateTime.new(word.date.year, word.date.month)
         end.uniq
     end
+
+    def self.create
+    end
+
+
     def self.list_months
-        list = DailyWord::Word.get_months
+        list = self.get_months
         list.each_with_index do |d, i|
-        puts "\n#{i +1}. #{d.strftime('%B-%Y')}"
+        puts "#{i +1}. #{d.strftime('%B-%Y')}"
         end
+    end
+
+    def self.display_data(word)
+        puts "\nToday's Daily Word is:\n\n"
+        puts "\n\n#{word.name.upcase}\n"
+        puts "\nPronunciation:\n"
+        puts "#{word.pronunciation}\n\n" 
+        puts "\nDefinition:\n"
+        puts "\n#{word.definition}\n\n"
+        puts "\nExample:\n"
+        puts "\n#{word.example}\n\n"
     end
 end

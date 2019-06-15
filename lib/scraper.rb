@@ -26,7 +26,7 @@ class DailyWord::Scraper
     end
 
 
-    def self.get_missing_data(word)
+    def self.get_missing_data(word)#this method is expecting the word variable to be a word object not a string.
         if word.is_full? == false
         bulk = Nokogiri::HTML(open("#{word.url}"))
         word.definition = bulk.css("div.wod-definition-container p")[0].text
@@ -40,10 +40,11 @@ class DailyWord::Scraper
         words_from_cal = bulk.css("div.more-words-of-day-container")
         words_from_cal.each do |wm|
             year_month = wm.css("h3").text.split
-            words = bulk.css("ul.more-wod-items a")
+            words = wm.css("ul.more-wod-items a")
             words.each do |link|
                 name = link.text
-                day = link.attr("href").split("-")[-1]
+                #binding.pry
+                day = link.attr("href").split("-")[-1] 
                 month = link.attr("href").split("-")[-2]
                 year = link.attr("href").split("-")[-3]
                 url = "https://www.merriam-webster.com/#{link.attr("href")}"

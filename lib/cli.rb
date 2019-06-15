@@ -4,22 +4,69 @@ class DailyWord::CLI
         self.greeting
         words
         word_of_day
-        loop do
-            user_input = menu
-            if user_input == "exit" || user_input.include?("n")
-                puts "\nGood bye!"
-                return 
-            elsif user_input.include?("1,2,3,4,5,6,7,8,9,10,11,12")
-                puts "\nDailyWords for the month of:\n"
-                words_of_month(input)
-            else
-                case user_input
-                    when "y"
-                        puts "\nPlease enter the number for the month you wish to see!\n" 
-                        DailyWord::Word.list_months
-                    else
-                        puts "I dont understand that."
-                end
+        user_input = nil 
+        until user_input == "exit"
+            puts "\n\nTo see the Daily Words calendar enter 'c' then enter a number from the list.\n"
+            user_input = gets.strip.downcase
+                
+            case 
+                when user_input == "c"
+                    months
+                when user_input == "january-2019" || user_input.include?("jan")
+                    puts "\n\nDailyWords for:\n\n"
+                    words_of_month(user_input)
+                    puts "\n\nType the word to see it's details.\n"
+                when user_input == "february-2019" || user_input.include?("feb")
+                    puts "\n\nDailyWords for:\n\n"
+                    words_of_month(user_input)
+                    puts "\n\nType the word to see it's details.\n"
+                when user_input == "march-2019" || user_input.include?("mar")
+                    puts "\n\nDailyWords for:\n\n"
+                    words_of_month(user_input)
+                    puts "\n\nType the word to see it's details.\n"
+                when user_input == "april-2019" || user_input.include?("apr")
+                    puts "\n\nDailyWords for:\n\n"
+                    words_of_month(user_input)
+                    puts "\n\nType the word to see it's details.\n"
+                when user_input == "may-2019" || user_input.include?("m")
+                    puts "\n\nDailyWords for:\n\n"
+                    words_of_month(user_input)
+                    puts "\n\nType the word to see it's details.\n"
+                when user_input == "june-2018" || user_input.include?("jun")
+                    puts "\n\nDailyWords for:\n\n"
+                    words_of_month(user_input)
+                    puts "\n\nType the word to see it's details.\n"
+                when user_input == "july-2018" || user_input.include?("jul")
+                    puts "\n\nDailyWords for:\n\n"
+                    words_of_month(user_input)
+                    puts "\n\nType the word to see it's details.\n"
+                when user_input == "august-2018" || user_input.include?("aug")
+                    puts "\n\nDailyWords for:\n\n"
+                    words_of_month(user_input)
+                    puts "\n\nType the word to see it's details.\n"
+                when user_input == "september-2018" || user_input.include?("sep")
+                    puts "\n\nDailyWords for:\n\n"
+                    words_of_month(user_input)
+                    puts "\n\nType the word to see it's details.\n"
+                when user_input == "october-2018" || user_input.include?("oct")
+                    puts "\n\nDailyWords for:\n\n"
+                    words_of_month(user_input)
+                    puts "\n\nType the word to see it's details.\n"
+                when user_input == "november-2018" || user_input.include?("nov")
+                    puts "\n\nDailyWords for:\n\n"
+                    words_of_month(user_input)
+                    puts "\n\nType the word to see it's details.\n"
+                when user_input == "december-2018" || user_input.include?("dec")
+                    puts "\n\nDailyWords for:\n\n"
+                    words_of_month(user_input)
+                    puts "\n\nType the word to see it's details.\n"
+                when user_input.to_i >0
+                    get_missing_data(user_input)#here we are passing a number as a string in the form of user_input
+                    show_details(user_input)#here we are passing the word name as a string.
+                when user_input == "exit" || user_input.include?("n")
+                    puts "\nSee you tomorrow!"
+                else
+                    puts "\n\nWoah! That was weird... Please try again."
             end
         end
     end 
@@ -29,15 +76,6 @@ class DailyWord::CLI
         puts "\n\nWelcome to Daily Word!"
     end
 
-    def menu
-        puts "\n\nWould you like to see past DailyWords? y/n\n"
-        user_input = gets.strip.downcase
-        if user_input == "exit" || user_input.include?("n")
-            puts "Ok, see ya tomorrow!"
-        end
-        return user_input
-    end
-
     def word_of_day
         DailyWord::Scraper.wod
     end
@@ -45,26 +83,22 @@ class DailyWord::CLI
     def words
         DailyWord::Scraper.get_words
     end
-    
 
-    def words_of_month(input)
-        binding.pry
-        inputarg = input.to_i -1
-        months = DailyWord::Word.get_months
-        dates = months.map.strftime('%B-%Y')
-        DailyWord::Word.all.select{|wo| wo} #need to finish this method.
-  
+    def months 
+        DailyWord::Word.list_months
     end
 
-    def display_data(word)
-        puts "\nToday's Daily Word is:\n\n"
-        puts "\n\n#{word.name.upcase}\n"
-        puts "\nPronunciation:\n"
-        puts "#{word.pronunciation}\n\n" 
-        puts "\nDefinition:\n"
-        puts "\n#{word.definition}\n\n"
-        puts "\nExample:\n"
-        puts "\n#{word.example}\n\n"
+    def show_details(input) 
+        DailyWord::Word.display_data(word)
+    end
+
+    def words_of_month(input)
+        month = DailyWord::Word.get_months[input.to_i-1].strftime("%B-%Y")
+        matches = DailyWord::Word.all.select{|d|d.date.strftime("%B-%Y") == month}
+        # binding.pry
+        matches.each_with_index do |w, i| 
+            puts "#{i+1} #{w.name}, #{w.date.strftime('%B-%Y')}"
+        end
     end
 
 end

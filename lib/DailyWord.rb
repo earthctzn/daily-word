@@ -1,4 +1,4 @@
-# require_relative "DailyWord/version"
+# require_relative "./lib/DailyWord/version"
 # require_relative "./cli"
 # require_relative "./scraper"
 # require_relative "./word"
