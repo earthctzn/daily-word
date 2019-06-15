@@ -27,8 +27,9 @@ class DailyWord::Scraper
 
 
     def self.get_missing_data(word)#this method is expecting the word variable to be a word object not a string.
+        #binding.pry
         if word.is_full? == false
-        bulk = Nokogiri::HTML(open("#{word.url}"))
+        bulk = Nokogiri::HTML(open(word.url))
         word.definition = bulk.css("div.wod-definition-container p")[0].text
         word.example = bulk.css("div.wotd-examples p").text
         word.pronunciation = bulk.css("span.word-syllables").text
@@ -47,7 +48,7 @@ class DailyWord::Scraper
                 day = link.attr("href").split("-")[-1] 
                 month = link.attr("href").split("-")[-2]
                 year = link.attr("href").split("-")[-3]
-                url = "https://www.merriam-webster.com/#{link.attr("href")}"
+                url = "https://www.merriam-webster.com#{link.attr("href")}"
                 date = DateTime.new(year.to_i, month.to_i, day.to_i)
                 DailyWord::Word.new(name, date, url)
             end

@@ -3,13 +3,16 @@ class DailyWord::CLI
     def call
         self.greeting
         words
-        word_of_day
+        #word_of_day
         user_input = nil 
         until user_input == "exit"
-            puts "\n\nTo see the Daily Words calendar enter 'c' then enter a number from the list.\n"
+            puts "\n\nTo see the Daily Words calendar enter 'c' then type the month-year you want to see.\n"
+            puts "\nTo view the word of the day type wod"
             user_input = gets.strip.downcase
                 
             case 
+                when user_input == "wod"
+                    word_of_day
                 when user_input == "c"
                     months
                 when user_input == "january-2019" || user_input.include?("jan")
@@ -61,7 +64,6 @@ class DailyWord::CLI
                     words_of_month(user_input)
                     puts "\n\nType the word to see it's details.\n"
                 when user_input.to_i >0
-                    get_missing_data(user_input)#here we are passing a number as a string in the form of user_input
                     show_details(user_input)#here we are passing the word name as a string.
                 when user_input == "exit" || user_input.include?("n")
                     puts "\nSee you tomorrow!"
@@ -88,15 +90,18 @@ class DailyWord::CLI
         DailyWord::Word.list_months
     end
 
-    def show_details(input) 
-        DailyWord::Word.display_data(word)
+    def show_details(input)
+        #binding.pry
+        word_obj = @matches[input.to_i-1]
+        DailyWord::Scraper.get_missing_data(word_obj) 
+        DailyWord::Word.display_data(word_obj)
     end
 
     def words_of_month(input)
         month = DailyWord::Word.get_months[input.to_i-1].strftime("%B-%Y")
-        matches = DailyWord::Word.all.select{|d|d.date.strftime("%B-%Y") == month}
+        @matches = DailyWord::Word.all.select{|d|d.date.strftime("%B-%Y") == month}
         # binding.pry
-        matches.each_with_index do |w, i| 
+        @matches.each_with_index do |w, i| 
             puts "#{i+1} #{w.name}, #{w.date.strftime('%B-%Y')}"
         end
     end
