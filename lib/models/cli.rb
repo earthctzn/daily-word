@@ -18,19 +18,18 @@ class DailyWord::CLI
 
 
     def cal_menu
-       puts "in the cal menu"
         user_input = gets.strip.downcase
         if user_input == "exit"
             puts "\nSee you tomorrow!\n\n" 
         elsif
             user_input == "cal"
             months
+            wod_msg
             choose_month_msg
             choose_month
         else
             puts "\n\nWoah! That was weird... Please try again."
         end
-
     end 
 
     def choose_month_msg
@@ -41,7 +40,6 @@ class DailyWord::CLI
        puts "in the choose month menu"
         user_input = nil
         user_input = gets.strip.downcase
-
         case 
             when user_input == "6" 
                 puts "\n\nDailyWords for January 2019:\n\n"
@@ -130,7 +128,6 @@ class DailyWord::CLI
     end
 
     def more_words_menu
-       puts "in the more words menu"
         user_input = gets.strip.downcase
         case user_input
             when "yes"
@@ -157,10 +154,8 @@ class DailyWord::CLI
     def which_one(selected_word)
         range = (1..@list.length).to_a
         selected_word = gets.strip
-        
         if selected_word != "exit"
             selected_word = selected_word.to_i
-            #binding.pry
                 if !range.include?(selected_word)
                     puts "Hmm... Try entering a number between #{range[0]} and #{range[-1]}."
                     which_one(selected_word)
@@ -176,7 +171,6 @@ class DailyWord::CLI
     end
 
     def show_details(input)
-        #binding.pry
         word_obj = @matches[input.to_i-1]
         DailyWord::Scraper.get_missing_data(word_obj) 
         DailyWord::Word.display_data(word_obj)
@@ -185,11 +179,8 @@ class DailyWord::CLI
     def words_of_month(input)
         month = DailyWord::Word.get_months[input.to_i-1].strftime("%B-%Y")
         @matches = DailyWord::Word.all.select{|d|d.date.strftime("%B-%Y") == month}
-        #binding.pry
          @list = @matches.each_with_index do |w, i|
-            puts "#{i+1} #{w.name}, #{w.date.strftime('%B-%Y')}"
-            
+            puts "#{i+1} #{w.name}, #{w.date.strftime('%B-%Y')}" 
         end
     end
-
 end

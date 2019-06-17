@@ -1,7 +1,5 @@
 class DailyWord::Word 
-    extend DailyWord::Findable
-    extend DailyWord::Saveable::ClassMethods
-    include DailyWord::Saveable::InstanceMethods
+
 
     attr_accessor :name, :date, :url, :definition, :example, :pronunciation
 
@@ -29,7 +27,7 @@ class DailyWord::Word
         end
     end
 
-    def self.get_months #this method retuns an array of DateTime objects. the array starts with the curent
+    def self.get_months #this method retuns an array of DateTime objects. the array starts with the curent month.
         self.all.map do |word| 
             DateTime.new(word.date.year, word.date.month)
         end.uniq

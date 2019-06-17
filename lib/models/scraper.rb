@@ -1,6 +1,5 @@
 class DailyWord::Scraper
-    extend DailyWord::Saveable::ClassMethods
-    include DailyWord::Saveable::InstanceMethods
+
     DATA = "https://www.merriam-webster.com/word-of-the-day/calendar"
 
     WOD = "https://www.merriam-webster.com/word-of-the-day"
@@ -16,13 +15,7 @@ class DailyWord::Scraper
         url = "https://www.merriam-webster.com/word-of-the-day/#{word}-#{date.strftime("%Y-%m-%d")}"
         d = DailyWord::Word.new(word, date, url, definition, example, pronunciation)
         
-        puts "\nToday's Daily Word is:\n\n"
-        puts "\n\n#{d.name.upcase}\n"
-        puts "#{d.pronunciation}\n\n" 
-        puts "\nDefinition:\n"
-        puts "\n#{d.definition}\n\n"
-        puts "\nExample:\n"
-        puts "\n#{d.example}\n\n"
+        DailyWord::Word.display_data(d)
     
     end
 
