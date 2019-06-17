@@ -167,7 +167,6 @@ class DailyWord::CLI
     def more_words_msg
         puts "<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>"
         puts "\nWould you like to see more DailyWords 'yes/no'?"
-        puts "To start over enter 'menu'"
         puts "When done enter 'exit' to end DailyWords.\n"
         puts "<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>"
     end
@@ -178,8 +177,6 @@ class DailyWord::CLI
             when "yes"
                 cal_menu_msg
                 cal_menu
-            when "menu"
-                call
             when "no"
                 puts "-----------------------------------------------------------------------------------------------------------------------"
                 puts "\nSee you tomorrow!\n"
@@ -188,7 +185,6 @@ class DailyWord::CLI
                 puts "-----------------------------------------------------------------------------------------------------------------------"
                 puts "\nSee you tomorrow!\n"
                 puts "-----------------------------------------------------------------------------------------------------------------------"
-                
             else
                 puts "-----------------------------------------------------------------------------------------------------------------------"
                 puts "\nWoah! That was weird... Please try again.\n"
@@ -203,7 +199,7 @@ class DailyWord::CLI
         puts "<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>"
     end
 
-    def Choose_word(selected_word)
+    def choose_word(selected_word)
         range = (1..@list.length).to_a
         selected_word = gets.strip
         if selected_word != "exit"
