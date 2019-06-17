@@ -8,7 +8,7 @@ Coming soon - audio pronounciation of each word.
 
 To install this gem, type the following in your command line:
 
-    $ gem install DailyWord
+```$ gem install DailyWord```
 
 ### Prerequisites
 You will need the nokogiri and rake gems to run DailyWord. These will be installed upon running:
@@ -39,3 +39,6 @@ Everyone interacting in the DailyWord project’s codebases, issue trackers, cha
 ## Author
 
 * **Caleb** - *Initial Work* - [DailyWord](https://github.com/<earthctzn>/DailyWord)
+
+### Blog Post
+[My First CLI Gem Project Flatiron Schools](https://medium.com/@earthctzn1/my-first-cli-gem-project-flatiron-schools-7f96f35366f1)

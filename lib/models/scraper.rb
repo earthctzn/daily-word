@@ -1,5 +1,6 @@
 class DailyWord::Scraper
-
+    extend DailyWord::Saveable::ClassMethods
+    include DailyWord::Saveable::InstanceMethods
     DATA = "https://www.merriam-webster.com/word-of-the-day/calendar"
 
     WOD = "https://www.merriam-webster.com/word-of-the-day"

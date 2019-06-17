@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["earthctzn"]
   spec.email         = ["earthctzn1@gmail.com"]
 
-  spec.summary       = %q{Helps expand your vocabulary by providing one new word and its definition a day.}
+  spec.summary       = %q{Helps expand your vocabulary by providing a word and its definition a day.}
   spec.homepage      = "https://github.com/earthctzn/daily-word"
   spec.license       = "MIT"
 

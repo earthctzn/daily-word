@@ -35,10 +35,6 @@ class DailyWord::Word
         end.uniq
     end
 
-    def self.create
-    end
-
-
     def self.list_months 
         list = self.get_months
         list.each_with_index do |d, i|

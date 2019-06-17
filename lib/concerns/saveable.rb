@@ -9,7 +9,7 @@ module DailyWord::Saveable
   end
   module ClassMethods
 
-    def create(name, date, url, definition, example, pronunciation)
+    def self.create(name, date, url, definition, example, pronunciation)
       self.new(name=nil, date=nil, url=nil, definition=nil, example=nil, pronunciation=nil).tap(&:save)
     end
   
