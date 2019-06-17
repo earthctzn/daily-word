@@ -235,7 +235,7 @@ class DailyWord::CLI
     def words_of_month(input)
         month = DailyWord::Word.get_months[input.to_i-1].strftime("%B-%Y")
         @matches = DailyWord::Word.all.select{|d|d.date.strftime("%B-%Y") == month}
-         @list = @matches.each_with_index do |w, i|
+        @list = @matches.each_with_index do |w, i|
             puts "#{i+1} #{w.name}, #{w.date.strftime('%B-%Y')}" 
         end
     end
