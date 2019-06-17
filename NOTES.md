@@ -20,5 +20,4 @@ I'd like the app to start with:
 8. based on input scrape the missing data for the word and save it then display all data.
 9. ask for input
 
-need to work out how to find by date and recycle methods 
 
