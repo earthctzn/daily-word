@@ -13,10 +13,17 @@ class DailyWord::Scraper
         example = bulk.css("div.wotd-examples p").text
         pronunciation = bulk.css("span.word-syllables").text
         url = "https://www.merriam-webster.com/word-of-the-day/#{word}-#{date.strftime("%Y-%m-%d")}"
-        d = DailyWord::Word.new(word, date, url, definition, example, pronunciation)
-        
+        #binding.pry
+        # if DailyWord::Word.all.find{ |obj| obj.pronunciation == pronunciation}
+        #     d = DailyWord::Word.all.find{ |obj| obj.name == word}
+        #     #binding.pry
+        # else
+        #     d = DailyWord::Word.new(word, date, url, definition, example, pronunciation) 
+        # end
+        d = DailyWord::Word.all.find{ |obj| obj.pronunciation == pronunciation} || DailyWord::Word.new(word, date, url, definition, example, pronunciation)
         DailyWord::Word.display_data(d)
-    
+
+
     end
 
 
@@ -44,7 +51,10 @@ class DailyWord::Scraper
                 year = link.attr("href").split("-")[-3]
                 url = "https://www.merriam-webster.com#{link.attr("href")}"
                 date = DateTime.new(year.to_i, month.to_i, day.to_i)
-                DailyWord::Word.new(name, date, url)
+                #binding.pry
+                if !DailyWord::Word.all.find{ |obj| obj.name == name}
+                    DailyWord::Word.new(name, date, url)
+                end
             end
         end  
     end 

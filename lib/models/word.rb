@@ -20,7 +20,7 @@ class DailyWord::Word
     end
 
     def is_full?
-        if  @definition != nil || @example != nil || @pronunciation == !nil
+        if  @definition != nil #|| @example != nil || @pronunciation == !nil
             return true
         else
             return false
@@ -41,7 +41,7 @@ class DailyWord::Word
     end
 
     def self.display_data(word_obj)#this method is expecting a word object as the the argument
-        puts "\nToday's Daily Word is:\n\n"
+        puts "\nThe Daily Word is:\n\n"
         puts "\n\n#{word_obj.name.upcase}\n"
         puts "\nPronunciation:\n"
         puts "#{word_obj.pronunciation}\n\n" 
