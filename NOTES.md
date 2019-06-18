@@ -19,7 +19,6 @@ I'd like the app to start with:
 5. ask for input
 6. based on input display list of words for that month
 7. ask for input
-8. based on input scrape the missing data for the word and save it then display all data.
+8. based on input scrape the missing data for the word, save the collected data then display all data.
 9. ask for input
-
-
+10. Here we can start looping the menu options for the user.

@@ -10,10 +10,10 @@ class DailyWord::CLI
             user_input = gets.strip.downcase
             if user_input == "exit"
                 puts "-----------------------------------------------------------------------------------------------------------------"
-                puts "\nSee you tomorrow 1!\n\n"
+                puts "\nSee you tomorrow!\n\n"
                 puts "-----------------------------------------------------------------------------------------------------------------"
-                return
-            elsif user_input == "cal"
+                quitting
+            elsif user_input == "cal" || user_input.include?("c")
                 months
                 choose_month_msg
                 choose_month_receiver
@@ -32,9 +32,6 @@ class DailyWord::CLI
         puts "<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>"
     end
 
-
-
-
     def choose_month_msg
         puts "<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>"
         puts "\nChoose a number from the list to view the words for that month.\n"
@@ -47,9 +44,9 @@ class DailyWord::CLI
             if user_input == "exit"
                 exit
                 puts "------------------------------------------------------------------------------------------------------------"
-                puts "\nSee you tomorrow 2!\n\n"
+                puts "\nSee you tomorrow!\n\n"
                 puts "------------------------------------------------------------------------------------------------------------" 
-                return
+                quitting
             else
                 case 
                     when user_input == "6" 
@@ -187,7 +184,7 @@ class DailyWord::CLI
 
     def more_words_msg
         puts "<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>"
-        puts "\nWould you like to see more DailyWords? Enter 'yes' to start over or 'no' to exit."
+        puts "\nWould you like to see more DailyWords? Enter 'yes' to start over or 'no' to exit.\n\n"
         puts "<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>"
     end
 
@@ -196,7 +193,7 @@ class DailyWord::CLI
             user_input = gets.strip.downcase
             if user_input == "exit" || user_input == "no"
                 puts "-----------------------------------------------------------------------------------------------------"
-                puts "\nSee you tomorrow 3!\n"
+                puts "\nSee you tomorrow!\n"
                 puts "-----------------------------------------------------------------------------------------------------"
                 quitting 
             elsif user_input == "yes"
@@ -234,7 +231,7 @@ class DailyWord::CLI
                 end
         else
             puts "-----------------------------------------------------------------------------------------------------"
-            puts "\nSee you tomorrow 4!\n"
+            puts "\nSee you tomorrow!\n"
             puts "-----------------------------------------------------------------------------------------------------"
             quitting
         end
