@@ -16,17 +16,15 @@ class DailyWord::Scraper
         # binding.pry
         d = DailyWord::Word.all.find{ |obj| obj.pronunciation == pronunciation} || DailyWord::Word.new(word, date, url, definition, example, pronunciation)
         DailyWord::Word.display_data(d)
-
-
     end
 
 
     def self.get_missing_data(word)#this method is expecting the word variable to be a word object not a string.
         if word.is_full? == false
-        bulk = Nokogiri::HTML(open(word.url))
-        word.definition = bulk.css("div.wod-definition-container p")[0].text
-        word.example = bulk.css("div.wotd-examples p").text
-        word.pronunciation = bulk.css("span.word-syllables").text
+            bulk = Nokogiri::HTML(open(word.url))
+            word.definition = bulk.css("div.wod-definition-container p")[0].text
+            word.example = bulk.css("div.wotd-examples p").text
+            word.pronunciation = bulk.css("span.word-syllables").text
         end 
     end
 
