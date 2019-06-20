@@ -48,110 +48,13 @@ class DailyWord::CLI
                 puts "------------------------------------------------------------------------------------------------------------" 
                 quitting
             else
-                case 
-                    when user_input == "6" 
-                        puts "-----------------------------------------------------------------------------------------------------"
-                        puts "\nDailyWords for January 2019:\n"
-                        puts "-----------------------------------------------------------------------------------------------------"
+                case user_input.to_i
+                    when 1..13
+                        daily_words_msg(user_input)
                         words_of_month_receiver(user_input)
                         choose_word_msg
                         choose_word_receiver
                         
-                    when user_input == "5" 
-                        puts "-----------------------------------------------------------------------------------------------------"
-                        puts "\nDailyWords for February 2019:\n"
-                        puts "-----------------------------------------------------------------------------------------------------"
-                        words_of_month_receiver(user_input)
-                        choose_word_msg
-                        choose_word_receiver
-                            
-                    when user_input == "4" 
-                        puts "-----------------------------------------------------------------------------------------------------"
-                        puts "\nDailyWords for March 2019:\n"
-                        puts "-----------------------------------------------------------------------------------------------------"
-                        words_of_month_receiver(user_input)
-                        choose_word_msg
-                        choose_word_receiver
-                            
-                    when user_input == "3" 
-                        puts "-----------------------------------------------------------------------------------------------------"
-                        puts "\nDailyWords for April 2019:\n"
-                        puts "-----------------------------------------------------------------------------------------------------"
-                        words_of_month_receiver(user_input)
-                        choose_word_msg
-                        choose_word_receiver
-
-                    when user_input == "2" 
-                        puts "-----------------------------------------------------------------------------------------------------"
-                        puts "\nDailyWords for May 2019:\n"
-                        puts "-----------------------------------------------------------------------------------------------------"
-                        words_of_month_receiver(user_input) 
-                        choose_word_msg
-                        choose_word_receiver
-
-                    when user_input == "1" 
-                        puts "-----------------------------------------------------------------------------------------------------"
-                        puts "\nDailyWords for June 2019:\n"
-                        puts "-----------------------------------------------------------------------------------------------------"
-                        words_of_month_receiver(user_input)
-                        choose_word_msg
-                        choose_word_receiver
-
-                    when user_input == "13"
-                        puts "-----------------------------------------------------------------------------------------------------"
-                        puts "\nDailyWords for June 2019:\n"
-                        puts "-----------------------------------------------------------------------------------------------------"
-                        words_of_month_receiver(user_input)
-                        choose_word_msg
-                        choose_word_receiver
-
-                    when user_input == "12"
-                        puts "-----------------------------------------------------------------------------------------------------"
-                        puts "\nDailyWords for July 2018:\n"
-                        puts "-----------------------------------------------------------------------------------------------------"
-                        words_of_month_receiver(user_input)
-                        choose_word_msg
-                        choose_word_receiver
-                            
-                    when user_input == "11" 
-                        puts "-----------------------------------------------------------------------------------------------------"
-                        puts "\nDailyWords for August 2018:\n"
-                        puts "-----------------------------------------------------------------------------------------------------"
-                        words_of_month_receiver(user_input)
-                        choose_word_msg
-                        choose_word_receiver
-                            
-                    when user_input == "10" 
-                        puts "-----------------------------------------------------------------------------------------------------"
-                        puts "\nDailyWords for September 2018:\n"
-                        puts "-----------------------------------------------------------------------------------------------------"
-                        words_of_month_receiver(user_input)
-                        choose_word_msg
-                        choose_word_receiver
-                            
-                    when user_input == "9" 
-                        puts "-----------------------------------------------------------------------------------------------------"
-                        puts "\nDailyWords for October 2018:\n"
-                        puts "-----------------------------------------------------------------------------------------------------"
-                        words_of_month_receiver(user_input)
-                        choose_word_msg
-                        choose_word_receiver
-                            
-                    when user_input == "8" 
-                        puts "-----------------------------------------------------------------------------------------------------"
-                        puts "\nDailyWords for November 2018:\n"
-                        puts "-----------------------------------------------------------------------------------------------------"
-                        words_of_month_receiver(user_input)
-                        choose_word_msg
-                        choose_word_receiver
-                            
-                    when user_input == "7" 
-                        puts "-----------------------------------------------------------------------------------------------------"
-                        puts "\nDailyWords for December 2018:\n"
-                        puts "-----------------------------------------------------------------------------------------------------"
-                        words_of_month_receiver(user_input)
-                        choose_word_msg
-                        choose_word_receiver
                     else
                         puts "<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>"
                         puts "\nWoah! That was weird... Please try again\n"
@@ -170,6 +73,25 @@ class DailyWord::CLI
         puts "<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>"
     end
 
+
+
+
+
+    def daily_words_msg(user_input)
+        puts "-----------------------------------------------------------------------------------------------------"
+        puts "\nDailyWords for #{DailyWord::Word.get_months[user_input.to_i-1].strftime("%B-%Y")}:\n"
+        puts "-----------------------------------------------------------------------------------------------------"
+    end
+
+
+
+    def months 
+        # binding.pry
+        DailyWord::Word.list_months
+    end
+
+
+
     def word_of_day
         DailyWord::Scraper.wod
     end
@@ -178,9 +100,7 @@ class DailyWord::CLI
         DailyWord::Scraper.get_words
     end
 
-    def months 
-        DailyWord::Word.list_months
-    end
+
 
     def more_words_msg
         puts "<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>"
